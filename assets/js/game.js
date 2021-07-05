@@ -83,6 +83,16 @@ var startGame = function (){
             enemyHealth = 50;
 
             fight(pickedEnemyName);
+            //if we're not at the last enemy in the array
+            if(playerHealth > 0 && i < enemyNames.length - 1){
+                //ask if player wants to use the store before next round
+                var storeConfirm = window.confirm("the fight is over, visiy the store before the next round?")
+
+                //if yes, take them to the store() function
+                if (storeConfirm){
+                    shop();
+                }
+            }
         }
         else{
             window.alert('you have lost your robot in battle! game over!')
@@ -112,6 +122,39 @@ var endGame = function(){
         window.alert("Thank you for playing Robot Gladiators! Come Back soon!")
     }
 }
+var shop = function() {
+    console.log("enetered the shop")
+    var shopOptionPrompt = window.prompt(
+        "Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter one: 'REFILL', 'UPGRADE', or 'LEAVE' to make a choice."
+    );
+    switch(shopOptionPrompt){
+        case "refill":
+            window.alert("Refilling player's health by 20 for dollars.");
+
+            //increase health and decrease money
+            playerHealth = playerHealth + 20;
+            playerMoney = playerMoney - 7;
+            break;
+        case "upgrade":
+            window.alert("Upgrade player's attack by 6 for 7 dollars.");
+
+            //increase attack and decrease money
+            playerAttack = playerAttack + 6;
+            playerMoney = playerMoney - 7;
+            break;
+        case "leave":
+            window.alert("Leave the store.");
+
+            //do nothing, so function will end
+            break;
+        default:
+            window.alert("You did not pick a valid option. Try agian.");
+
+            // call shope() again to force player to pick a valid option
+            shop();
+            break;
+    }
+};
 
 //start the game when the page loads
 startGame();

@@ -3,6 +3,13 @@ var playerHealth = 100;
 var playerAttack = 10;
 var playerMoney = 10;
 
+// function to generate a random numeric value
+var randomNumber = function(min, max) {
+    var value = Math.floor(Math.random() * (max - min + 1) + min);
+  
+    return value;
+  };
+
 var enemyNames = ["Roberto", "Amy Android", "Robo Trumble"];
 var enemyHealth = randomNumber(40, 60);
 var enemyAttack = 12;
@@ -66,7 +73,7 @@ var fight = function(enemyName){
             window.alert(playerName + " has died!");
             break;
         }else{
-            window.alert(playerName+ " still has " + playerName + " health left.");
+            window.alert(playerName + " still has " + playerHealth + " health left.");
         }
     }
 };
@@ -134,7 +141,7 @@ var shop = function() {
         case "REFILL":
         case "refill":
             if(playerMoney >= 7){
-                window.alert("Refilling player's health by 20 for dollars.");
+                window.alert("Refilling player's health by 20 for 7 dollars.");
 
                 //increase health and decrease money
                 playerHealth = playerHealth + 20;

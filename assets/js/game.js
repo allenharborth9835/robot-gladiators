@@ -32,6 +32,14 @@ var fightOrSkip = function(){
 }
 
 var fight = function(enemy){
+    // keep track of who goes first
+    var isPlayerTurn = true;
+
+    // randomly change turn order
+    if (Math.random() > 0.5) {
+        isPlayerTurn = false;
+    }
+
     //repeat and execute as long as the enemy-robot is alive
     while(playerInfo.health > 0 && enemy.health > 0){
         if (fightOrSkip()){
@@ -40,11 +48,18 @@ var fight = function(enemy){
         }
 
         //Subtract the value of `playerAttack` from the value of `enemy.health` and use that result to update the value in the `enemy.health` variable
-        var damage = randomNumber(playerInfo.attack - 3 , playerInfo.attack)
+        var damage = randomNumber(playerInfo.attack - 3 , playerInfo.attack);
 
         enemy.health = Math.max(0, enemy.health - damage);
         console.log(
-            playerInfo.name + " attacked " + enemy.name + ". " + enemy.name + " now has " + enemy.health + " health remaining."
+            playerInfo.name +
+            " attacked " +
+            enemy.name +
+            ". " + 
+            enemy.name +
+            " now has " +
+            enemy.health +
+            " health remaining."
         );
 
         // check enemy's health
@@ -67,7 +82,12 @@ var fight = function(enemy){
 
         // Log a resulting message to the console so we know that it worked.
         console.log(
-            enemy.name + " attacted " + playerInfo.name + ". " + playerInfo.name + " now has " + playerInfo.health + " health remaining."
+            enemy.name +
+            " attacted " +
+            playerInfo.name +
+            ". " + playerInfo.name +
+            " now has " + playerInfo.health +
+            " health remaining."
         );
 
         //check players's health
@@ -75,7 +95,10 @@ var fight = function(enemy){
             window.alert(playerInfo.name + " has died!");
             break;
         }else{
-            window.alert(playerInfo.name + " still has " + playerInfo.health + " health left.");
+            window.alert(playerInfo.name +
+                " still has " +
+                playerInfo.health + 
+                " health left.");
         }
     }
 };
@@ -142,7 +165,8 @@ var shop = function() {
     switch(shopOptionPrompt){
         case 1:
             if(playerInfo.money >= 7){
-                window.alert("Refilling player's health by 20 for 7 dollars." + playerInfo.money + "left");
+                window.alert("Refilling player's health by 20 for 7 dollars." +
+                playerInfo.money + "left");
                 //increase health and decrease money
                 playerInfo.refillHealth();
                 break;
@@ -151,7 +175,8 @@ var shop = function() {
             }
         case 2:
             if(playerInfo.money >= 7){
-                window.alert("Upgrade player's attack by 6 for 7 dollars." + playerInfo.money + "left");
+                window.alert("Upgrade player's attack by 6 for 7 dollars." +
+                playerInfo.money + "left");
                 //increase attack and decrease money
                 playerInfo.upgradeAttack();
                 break;
